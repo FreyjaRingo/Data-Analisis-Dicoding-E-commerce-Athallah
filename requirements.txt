@@ -1,5 +1,5 @@
 pandas
 matplotlib
 seaborn
-streamlit
+streamlit==1.42.0
 pyarrow
