@@ -108,6 +108,8 @@ if len(df_geo_brazil) > 20000:
     df_map = df_geo_brazil.sample(n=20000, random_state=42)
 else:
     df_map = df_geo_brazil
+df_map['lat'] = df_map['lat'].astype(float)
+df_map['lon'] = df_map['lon'].astype(float)
 
 # Render map menggunakan data sample 
 st.map(df_map[['lat', 'lon']], zoom=3)
@@ -148,4 +150,5 @@ st.pyplot(fig4)
 
 
 st.caption("Hak Cipta © 2026 - Proyek Analisis Data E-Commerce oleh Athallah Azhar Aulia Hadi")
+
 
