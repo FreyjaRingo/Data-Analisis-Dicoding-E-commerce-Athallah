@@ -6,18 +6,19 @@ import datetime as dt
 
 st.set_page_config(page_title="E-Commerce Dashboard", layout="wide")
 
-@st.cache_data
 def load_data():
-    df = pd.read_parquet("ecommerce_cleaned.parquet")
-    df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'])
-    
-    # --- TAMBAHKAN KODE INI ---
-    # Ubah semua kolom float16 menjadi float32 agar Streamlit tidak error
-    kolom_float16 = df.select_dtypes(include=['float16']).columns
-    for col in kolom_float16:
-        df[col] = df[col].astype('float32')
+    try:
+        df = pd.read_parquet("ecommerce_cleaned.parquet")
+        df['order_purchase_timestamp'] = pd.to_datetime(df['order_purchase_timestamp'])
         
-    return df
+        kolom_float16 = df.select_dtypes(include=['float16']).columns
+        for col in kolom_float16:
+            df[col] = df[col].astype('float32')
+            
+        return df
+    except Exception as e:
+        st.error(f"Gagal memuat data: {e}")
+        st.stop()
 
 df_clean = load_data()
 
@@ -143,5 +144,6 @@ sns.barplot(data=segmen_counts, x='Total', y='Segment', palette='Set2', ax=ax4)
 ax4.set_xlabel("Jumlah Pelanggan")
 ax4.set_ylabel("Segmen")
 st.pyplot(fig4)
+
 
 st.caption("Hak Cipta © 2026 - Proyek Analisis Data E-Commerce oleh Athallah Azhar Aulia Hadi")
