@@ -41,6 +41,7 @@ df_items_unique = main_df.drop_duplicates(subset=['order_id', 'price', 'product_
 
 st.title("E-Commerce Data Analytics Dashboard")
 st.markdown("Menampilkan analisis performa bisnis, demografi pelanggan, dan kualitas layanan dari E-Commerce.")
+st.markdown("Karena keterbatasan memory streamlit, menggunakan 100% dataset tidak memungkinkan, dan beralih ke penggunaan 50000 sample data secara acak dengan seed = 42")
 
 col1, col2 = st.columns(2)
 with col1:
@@ -147,3 +148,4 @@ st.pyplot(fig4)
 
 
 st.caption("Hak Cipta © 2026 - Proyek Analisis Data E-Commerce oleh Athallah Azhar Aulia Hadi")
+
